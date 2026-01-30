@@ -11,8 +11,8 @@
     <!-- OVERLAY -->
     <div class="overlay"></div>
 
-    <!-- MUSIK PERTAMA -->
-    <audio id="bg-music" autoplay muted loop>
+    <!-- 🎵 MUSIK (TANPA AUTOPLAY) -->
+    <audio id="bg-music" loop preload="auto">
       <source src="music1.mp3" type="audio/mpeg" />
     </audio>
 
@@ -32,41 +32,39 @@
       <div class="description">Aku ada hadiah spesial buat Dilla 🌸</div>
 
       <div class="button">
-        <a href="flower.html" onclick="goNext()">Klik disini ya Dilla</a>
+        <a href="flower.html">Klik disini ya Dilla</a>
       </div>
     </div>
 
+    <!-- ✅ SCRIPT AUDIO AMAN SEMUA DEVICE -->
     <script>
-  const music = document.getElementById("bg-music");
-  let isPlaying = false;
+      const music = document.getElementById("bg-music");
+      let started = false;
 
-  function startMusic() {
-    if (isPlaying) return;
+      function startMusicOnce() {
+        if (started) return;
+        started = true;
 
-    music.muted = false;
-    music.volume = 0.5;
+        music.volume = 0.5;
+        music.currentTime = 0;
 
-    const playPromise = music.play();
-    if (playPromise !== undefined) {
-      playPromise
-        .then(() => {
-          isPlaying = true;
-        })
-        .catch((err) => {
-          console.log("Play blocked:", err);
+        music.play().catch(() => {
+          // fallback iOS
+          document.body.addEventListener("touchstart", () => music.play(), {
+            once: true,
+          });
         });
-    }
 
-    // hapus semua listener setelah sukses
-    document.removeEventListener("touchstart", startMusic);
-    document.removeEventListener("click", startMusic);
-    document.removeEventListener("scroll", startMusic);
-  }
+        // hapus listener
+        document.removeEventListener("pointerdown", startMusicOnce);
+        document.removeEventListener("touchstart", startMusicOnce);
+        document.removeEventListener("click", startMusicOnce);
+      }
 
-  // MOBILE-FIRST EVENTS
-  document.addEventListener("touchstart", startMusic, { passive: true });
-  document.addEventListener("click", startMusic);
-  document.addEventListener("scroll", startMusic);
-</script>
+      // 🔑 UNIVERSAL GESTURE
+      document.addEventListener("pointerdown", startMusicOnce, { once: true });
+      document.addEventListener("touchstart", startMusicOnce, { once: true });
+      document.addEventListener("click", startMusicOnce, { once: true });
+    </script>
   </body>
 </html>
