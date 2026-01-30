@@ -36,28 +36,37 @@
       </div>
     </div>
 
-    <!-- SCRIPT -->
     <script>
-      const music = document.getElementById("bg-music");
+  const music = document.getElementById("bg-music");
+  let isPlaying = false;
 
-      // aktifkan suara setelah interaksi pertama
-      function enableSound() {
-        music.muted = false;
-        music.volume = 0.5;
-        music.play();
+  function startMusic() {
+    if (isPlaying) return;
 
-        document.removeEventListener("click", enableSound);
-        document.removeEventListener("touchstart", enableSound);
-      }
+    music.muted = false;
+    music.volume = 0.5;
 
-      document.addEventListener("click", enableSound);
-      document.addEventListener("touchstart", enableSound);
+    const playPromise = music.play();
+    if (playPromise !== undefined) {
+      playPromise
+        .then(() => {
+          isPlaying = true;
+        })
+        .catch((err) => {
+          console.log("Play blocked:", err);
+        });
+    }
 
-      // saat pindah halaman
-      function goNext() {
-        music.pause();
-        music.currentTime = 0;
-      }
-    </script>
+    // hapus semua listener setelah sukses
+    document.removeEventListener("touchstart", startMusic);
+    document.removeEventListener("click", startMusic);
+    document.removeEventListener("scroll", startMusic);
+  }
+
+  // MOBILE-FIRST EVENTS
+  document.addEventListener("touchstart", startMusic, { passive: true });
+  document.addEventListener("click", startMusic);
+  document.addEventListener("scroll", startMusic);
+</script>
   </body>
 </html>
