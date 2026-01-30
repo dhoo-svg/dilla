@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hadiah Dilla</title>
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+
+  <body>
+    <!-- OVERLAY -->
+    <div class="overlay"></div>
+
+    <!-- MUSIK PERTAMA -->
+    <audio id="bg-music" autoplay muted loop>
+      <source src="music1.mp3" type="audio/mpeg" />
+    </audio>
+
+    <div class="container">
+      <div class="greetings">
+        <div class="line">
+          <span>F</span><span>A</span><span>R</span><span>A</span><span>D</span
+          ><span>I</span><span>L</span><span>L</span><span>A</span
+          ><span>H</span>
+        </div>
+        <div class="line">
+          <span>A</span><span>U</span><span>L</span><span>I</span><span>A</span
+          ><span class="love">❤️</span>
+        </div>
+      </div>
+
+      <div class="description">Aku ada hadiah spesial buat Dilla 🌸</div>
+
+      <div class="button">
+        <a href="flower.html" onclick="goNext()">Klik disini ya Dilla</a>
+      </div>
+    </div>
+
+    <!-- SCRIPT -->
+    <script>
+      const music = document.getElementById("bg-music");
+
+      // aktifkan suara setelah interaksi pertama
+      function enableSound() {
+        music.muted = false;
+        music.volume = 0.5;
+        music.play();
+
+        document.removeEventListener("click", enableSound);
+        document.removeEventListener("touchstart", enableSound);
+      }
+
+      document.addEventListener("click", enableSound);
+      document.addEventListener("touchstart", enableSound);
+
+      // saat pindah halaman
+      function goNext() {
+        music.pause();
+        music.currentTime = 0;
+      }
+    </script>
+  </body>
+</html>

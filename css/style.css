@@ -1,0 +1,198 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+body {
+  height: 100vh;
+  background-image: url("../img/dilla.jpeg");
+  background-size: cover;
+  background-repeat: no-repeat;
+
+  /* INI KUNCINYA 👇 */
+  background-position: center 20%;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  position: relative;
+}
+
+/* gelap lembut agar teks kebaca */
+.overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.25),
+    rgba(0, 0, 0, 0.55)
+  );
+}
+
+/* konten utama */
+.container {
+  position: relative;
+  text-align: center;
+  z-index: 2;
+}
+
+/* ===================== */
+/* TEXT */
+/* ===================== */
+.greetings {
+  font-size: 5.5rem;
+  font-weight: 800;
+  line-height: 1.2;
+}
+
+.line {
+  display: block;
+}
+
+/* huruf glow */
+.greetings span {
+  display: inline-block;
+  animation: glow 4s ease-in-out infinite;
+}
+
+/* delay lembut & konsisten */
+.greetings span:nth-child(n) {
+  animation-delay: calc(var(--i) * 0.18s);
+}
+
+/* manual index */
+.greetings span:nth-child(1) {
+  --i: 1;
+}
+.greetings span:nth-child(2) {
+  --i: 2;
+}
+.greetings span:nth-child(3) {
+  --i: 3;
+}
+.greetings span:nth-child(4) {
+  --i: 4;
+}
+.greetings span:nth-child(5) {
+  --i: 5;
+}
+.greetings span:nth-child(6) {
+  --i: 6;
+}
+.greetings span:nth-child(7) {
+  --i: 7;
+}
+.greetings span:nth-child(8) {
+  --i: 8;
+}
+.greetings span:nth-child(9) {
+  --i: 9;
+}
+.greetings span:nth-child(10) {
+  --i: 10;
+}
+.greetings span:nth-child(11) {
+  --i: 11;
+}
+.greetings span:nth-child(12) {
+  --i: 12;
+}
+.greetings span:nth-child(13) {
+  --i: 13;
+}
+.greetings span:nth-child(14) {
+  --i: 14;
+}
+.greetings span:nth-child(15) {
+  --i: 15;
+}
+
+/* glow halus */
+@keyframes glow {
+  0% {
+    opacity: 0.4;
+    text-shadow: none;
+  }
+  50% {
+    opacity: 1;
+    text-shadow:
+      0 0 15px #6fdde8,
+      0 0 40px #6fdde8;
+  }
+  100% {
+    opacity: 0.4;
+    text-shadow: none;
+  }
+}
+
+/* ❤️ LOVE */
+.love {
+  animation: heart 1.8s ease-in-out infinite;
+  margin-left: 12px;
+}
+
+@keyframes heart {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.2);
+  }
+}
+
+/* ===================== */
+/* DESC */
+/* ===================== */
+.description {
+  margin-top: 25px;
+  font-size: 1.3rem;
+  opacity: 0.9;
+}
+
+/* ===================== */
+/* BUTTON */
+/* ===================== */
+.button {
+  margin-top: 30px;
+}
+
+.button a {
+  padding: 12px 26px;
+  background: #6fdde8;
+  color: #111;
+  text-decoration: none;
+  border-radius: 30px;
+  font-weight: 600;
+  transition: 0.3s;
+}
+
+.button a:hover {
+  transform: scale(1.05);
+  background: #56c5d1;
+}
+
+/* ===================== */
+/* MOBILE */
+/* ===================== */
+@media (max-width: 576px) {
+  .greetings {
+    font-size: 3rem;
+  }
+  .body {
+    background-position: center 15%;
+  }
+  .love {
+    font-size: 3rem;
+  }
+
+  .description {
+    font-size: 1rem;
+    padding: 0 20px;
+  }
+}
